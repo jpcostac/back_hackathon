@@ -6,7 +6,8 @@ module.exports={
         let nome_turma = request.body.nome_turma;
         let periodo_turma = request.body.periodo_turma;
         let id_professor = request.body.id_professor;
-
+        
+        id_professor = parseInt(id_professor)
         if(
             nome_turma!=""&&
             periodo_turma!=""&&
@@ -28,6 +29,8 @@ module.exports={
 
     updateTurma: async(request,response)=>{
         json={error:"",result:""}
+
+        const id_turma = request.params.id_turma
         
         let nome_turma = request.body.nome_turma;
         let periodo_turma = request.body.periodo_turma;
@@ -39,6 +42,7 @@ module.exports={
             id_professor!=""
         ){
             let turma = await turmaService.updateTurma(
+                id_turma,
                 nome_turma,
                 periodo_turma,
                 id_professor
@@ -56,7 +60,7 @@ module.exports={
     deleteTurma: async(request,response)=>{
         json={error:"",result:""}
         
-        let id = request.params.id
+        let id = request.params.id_turma
 
         if(id){
             await turmaService.deleteTurma(id)
