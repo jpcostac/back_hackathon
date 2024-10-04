@@ -50,6 +50,7 @@ module.exports={
 
     updateAtividade: async(request, response) => {
         json= {error: "", result: ""};
+        const id_atividade = request.params.id_atividade;
         
         let nome_atividade = request.body.nome_atividade;
         let descricao = request.body.descricao;
@@ -62,7 +63,8 @@ module.exports={
             data_entrega!=""&&
             peso_nota!=""
         ){
-            let atividade = await atividadeService.updateAtividade(
+            await atividadeService.updateAtividade(
+                id_atividade,
                 nome_atividade,
                 descricao,
                 data_entrega,
@@ -81,7 +83,7 @@ module.exports={
     deleteAtividade: async(request, response) =>{
         let json = {error: "", result: {}};
 
-        let id = request.params.id
+        let id = request.params.id_atividade
 
         if(id){
             await atividadeService.deleteAtividade(id)
